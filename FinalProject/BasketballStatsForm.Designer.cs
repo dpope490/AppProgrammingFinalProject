@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.StatsTab = new System.Windows.Forms.TabControl();
-            this.addTeamTab = new System.Windows.Forms.TabPage();
             this.addPlayerTab = new System.Windows.Forms.TabPage();
-            this.searchStatsTab = new System.Windows.Forms.TabPage();
-            this.addGameTab = new System.Windows.Forms.TabPage();
-            this.firstNameLabel = new System.Windows.Forms.Label();
-            this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.addPlayerTitle = new System.Windows.Forms.Label();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
+            this.firstNameLabel = new System.Windows.Forms.Label();
+            this.addGameTab = new System.Windows.Forms.TabPage();
+            this.addTeamTab = new System.Windows.Forms.TabPage();
+            this.searchStatsTab = new System.Windows.Forms.TabPage();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameLabel = new System.Windows.Forms.Label();
             this.StatsTab.SuspendLayout();
             this.addPlayerTab.SuspendLayout();
             this.SuspendLayout();
@@ -52,18 +54,10 @@
             this.StatsTab.Size = new System.Drawing.Size(472, 382);
             this.StatsTab.TabIndex = 0;
             // 
-            // addTeamTab
-            // 
-            this.addTeamTab.Location = new System.Drawing.Point(4, 25);
-            this.addTeamTab.Name = "addTeamTab";
-            this.addTeamTab.Padding = new System.Windows.Forms.Padding(3);
-            this.addTeamTab.Size = new System.Drawing.Size(464, 353);
-            this.addTeamTab.TabIndex = 0;
-            this.addTeamTab.Text = "Add Team";
-            this.addTeamTab.UseVisualStyleBackColor = true;
-            // 
             // addPlayerTab
             // 
+            this.addPlayerTab.Controls.Add(this.lastNameLabel);
+            this.addPlayerTab.Controls.Add(this.lastNameTextBox);
             this.addPlayerTab.Controls.Add(this.addPlayerTitle);
             this.addPlayerTab.Controls.Add(this.firstNameTextBox);
             this.addPlayerTab.Controls.Add(this.firstNameLabel);
@@ -75,40 +69,6 @@
             this.addPlayerTab.Text = "Add Player";
             this.addPlayerTab.UseVisualStyleBackColor = true;
             // 
-            // searchStatsTab
-            // 
-            this.searchStatsTab.Location = new System.Drawing.Point(4, 25);
-            this.searchStatsTab.Name = "searchStatsTab";
-            this.searchStatsTab.Size = new System.Drawing.Size(464, 353);
-            this.searchStatsTab.TabIndex = 2;
-            this.searchStatsTab.Text = "Search Stats";
-            this.searchStatsTab.UseVisualStyleBackColor = true;
-            // 
-            // addGameTab
-            // 
-            this.addGameTab.Location = new System.Drawing.Point(4, 25);
-            this.addGameTab.Name = "addGameTab";
-            this.addGameTab.Size = new System.Drawing.Size(464, 353);
-            this.addGameTab.TabIndex = 3;
-            this.addGameTab.Text = "Add Game";
-            this.addGameTab.UseVisualStyleBackColor = true;
-            // 
-            // firstNameLabel
-            // 
-            this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Location = new System.Drawing.Point(8, 51);
-            this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(76, 17);
-            this.firstNameLabel.TabIndex = 0;
-            this.firstNameLabel.Text = "First Name";
-            // 
-            // firstNameTextBox
-            // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(11, 71);
-            this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(100, 22);
-            this.firstNameTextBox.TabIndex = 1;
-            // 
             // addPlayerTitle
             // 
             this.addPlayerTitle.AutoSize = true;
@@ -119,11 +79,71 @@
             this.addPlayerTitle.TabIndex = 2;
             this.addPlayerTitle.Text = "Insert info below to add a player";
             // 
+            // firstNameTextBox
+            // 
+            this.firstNameTextBox.Location = new System.Drawing.Point(11, 71);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(100, 22);
+            this.firstNameTextBox.TabIndex = 1;
+            // 
+            // firstNameLabel
+            // 
+            this.firstNameLabel.AutoSize = true;
+            this.firstNameLabel.Location = new System.Drawing.Point(8, 51);
+            this.firstNameLabel.Name = "firstNameLabel";
+            this.firstNameLabel.Size = new System.Drawing.Size(76, 17);
+            this.firstNameLabel.TabIndex = 0;
+            this.firstNameLabel.Text = "First Name";
+            // 
+            // addGameTab
+            // 
+            this.addGameTab.Location = new System.Drawing.Point(4, 25);
+            this.addGameTab.Name = "addGameTab";
+            this.addGameTab.Size = new System.Drawing.Size(464, 353);
+            this.addGameTab.TabIndex = 3;
+            this.addGameTab.Text = "Add Game";
+            this.addGameTab.UseVisualStyleBackColor = true;
+            // 
+            // addTeamTab
+            // 
+            this.addTeamTab.Location = new System.Drawing.Point(4, 25);
+            this.addTeamTab.Name = "addTeamTab";
+            this.addTeamTab.Padding = new System.Windows.Forms.Padding(3);
+            this.addTeamTab.Size = new System.Drawing.Size(464, 353);
+            this.addTeamTab.TabIndex = 0;
+            this.addTeamTab.Text = "Add Team";
+            this.addTeamTab.UseVisualStyleBackColor = true;
+            // 
+            // searchStatsTab
+            // 
+            this.searchStatsTab.Location = new System.Drawing.Point(4, 25);
+            this.searchStatsTab.Name = "searchStatsTab";
+            this.searchStatsTab.Size = new System.Drawing.Size(464, 353);
+            this.searchStatsTab.TabIndex = 2;
+            this.searchStatsTab.Text = "Search Stats";
+            this.searchStatsTab.UseVisualStyleBackColor = true;
+            // 
+            // lastNameTextBox
+            // 
+            this.lastNameTextBox.Location = new System.Drawing.Point(152, 71);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.Size = new System.Drawing.Size(100, 22);
+            this.lastNameTextBox.TabIndex = 1;
+            // 
+            // lastNameLabel
+            // 
+            this.lastNameLabel.AutoSize = true;
+            this.lastNameLabel.Location = new System.Drawing.Point(149, 51);
+            this.lastNameLabel.Name = "lastNameLabel";
+            this.lastNameLabel.Size = new System.Drawing.Size(76, 17);
+            this.lastNameLabel.TabIndex = 3;
+            this.lastNameLabel.Text = "Last Name";
+            // 
             // BasketballStatsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 380);
+            this.ClientSize = new System.Drawing.Size(463, 380);
             this.Controls.Add(this.StatsTab);
             this.Name = "BasketballStatsForm";
             this.Text = "BasketballStatsForm";
@@ -144,5 +164,7 @@
         private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.TabPage addGameTab;
         private System.Windows.Forms.Label addPlayerTitle;
+        private System.Windows.Forms.TextBox lastNameTextBox;
+        private System.Windows.Forms.Label lastNameLabel;
     }
 }
