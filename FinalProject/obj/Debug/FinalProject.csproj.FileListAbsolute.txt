@@ -25,3 +25,21 @@ C:\Users\davym\Documents\AppProgrammingFinalProject\FinalProject\obj\Debug\Final
 C:\Users\davym\Documents\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.csproj.CoreCompileInputs.cache
 C:\Users\davym\Documents\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.exe
 C:\Users\davym\Documents\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.pdb
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\FinalProject.exe.config
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\FinalProject.exe
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\FinalProject.pdb
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\EntityFramework.dll
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\System.Data.SQLite.dll
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\EntityFramework.xml
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\System.Data.SQLite.xml
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.csprojResolveAssemblyReference.cache
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.BasketballStatsForm.resources
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.csproj.GenerateResource.Cache
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.csproj.CoreCompileInputs.cache
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.exe
+C:\Users\dt213394\Documents\Visual Studio 2017\Projects\AppProgrammingFinalProject\FinalProject\obj\Debug\FinalProject.pdb

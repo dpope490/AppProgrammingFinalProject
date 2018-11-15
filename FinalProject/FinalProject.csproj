@@ -75,6 +75,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\BasketballDB.datasource" />
+    <None Include="Properties\DataSources\BasketballStatsForm.datasource" />
+    <None Include="Properties\DataSources\Game.datasource" />
+    <None Include="Properties\DataSources\Player.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\Team.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BasketballStatsForm.resx">
