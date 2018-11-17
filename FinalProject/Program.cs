@@ -24,22 +24,19 @@ namespace FinalProject
     [Table(Name = "Team")]
     public class Team
     {
-        [Column(IsPrimaryKey = true)]
-        public int Id { get; set; }
+		[Column(IsPrimaryKey = true)]
+		public String Name { get; set; }
         [Column]
         public String City { get; set; }
-        [Column]
-        public String Name { get; set; }
         [Column]
         public int Wins { get; set; }
         [Column]
         public int Losses { get; set; }
-        public Team(int id, String city, String name,
+        public Team(String name, String city,
             int wins, int losses)
         {
-            Id = id;
-            City = city;
-            Name = name;
+			Name = name;
+			City = city;
             Wins = wins;
             Losses = losses;
         }
@@ -54,47 +51,20 @@ namespace FinalProject
     public class Player
     {
         [Column(IsPrimaryKey = true)]
-        public int Id { get; set; }
+		public String Name { get; set; }
         [Column]
-        public String FirstName { get; set; }
+        public decimal Number { get; set; }
         [Column]
-        public String LastName { get; set; }
-        [Column]
-        public int Number { get; set; }
-        [Column]
-        public int Team { get; set; }
+        public String Team { get; set; }
         [Column]
         public String Position { get; set; }
-        [Column]
-        public int Points { get; set; }
-        [Column]
-        public int Rebounds { get; set; }
-        [Column]
-        public int Assists { get; set; }
-        [Column]
-        public int Turnovers { get; set; }
-        [Column]
-        public int Blocks { get; set; }
-        [Column]
-        public int Steals { get; set; }
 
-        public Player(int id, String firstName, String lastName,
-            int number, int team, String position, int points,
-            int rebounds, int assists, int turnovers,
-            int blocks, int steals)
+        public Player(String name, decimal number, String team, String position)
         {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
+			Name = name;
             Number = number;
             Team = team;
             Position = position;
-            Points = points;
-            Rebounds = rebounds;
-            Assists = assists;
-            Turnovers = turnovers;
-            Blocks = blocks;
-            Steals = steals;
 
         }
 
@@ -110,15 +80,15 @@ namespace FinalProject
         [Column(IsPrimaryKey = true)]
         public int Id { get; set; }
         [Column]
-        public int TeamOne { get; set; }
+        public String TeamOne { get; set; }
         [Column]
-        public int TeamTwo { get; set; }
+        public String TeamTwo { get; set; }
         [Column]
         public int TeamOnePoints { get; set; }
         [Column]
         public int TeamTwoPoints { get; set; }
 
-        public Game(int id, int teamOne, int teamTwo,
+        public Game(int id, String teamOne, String teamTwo,
             int teamOnePoints, int teamTwoPoints)
         {
             Id = id;
