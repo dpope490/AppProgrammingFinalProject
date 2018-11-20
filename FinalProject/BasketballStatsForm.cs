@@ -19,7 +19,16 @@ namespace FinalProject
             InitializeComponent();
         }
 
-        private void addPlayerButton_Click(object sender, EventArgs e)
+		static string UppercaseFirst(string s)
+		{
+			if (string.IsNullOrEmpty(s))
+			{
+				return string.Empty;
+			}
+			return char.ToUpper(s[0]) + s.Substring(1);
+		}
+
+		private void addPlayerButton_Click(object sender, EventArgs e)
         {
             SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
             var basketballDB = new BasketballDB(connection);
@@ -211,8 +220,8 @@ namespace FinalProject
             var basketballDB = new BasketballDB(connection);
             var teams = basketballDB.GetTable<Team>();
 
-            var name = teamNameTextBox.Text;
-            var city = cityTextBox.Text;
+            var name = UppercaseFirst(teamNameTextBox.Text);
+            var city = UppercaseFirst(cityTextBox.Text);
             var wins = int.Parse(winsTextBox.Text);
             var losses = int.Parse(lossesTextBox.Text);
 
@@ -222,7 +231,10 @@ namespace FinalProject
             basketballDB.SubmitChanges();
 
             addTeamConsole.Text = $"{city} {name} added.";
-        }
+
+			basketballDB.Dispose();
+			connection.Close();
+		}
 
         private void addTeamReset_Click(object sender, EventArgs e)
         {
@@ -237,5 +249,243 @@ namespace FinalProject
             }
             addTeamConsole.Text = null;
         }
-    }
+
+		private void nameCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (playerNameSearch.Enabled == true)
+			{
+				playerNameSearch.Enabled = false;
+			}
+			else
+			{
+				playerNameSearch.Enabled = true;
+			}
+		}
+
+		private void numberCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (playerNumberSearch.Enabled == true)
+			{
+				playerNumberSearch.Enabled = false;
+			}
+			else
+			{
+				playerNumberSearch.Enabled = true;
+			}
+		}
+
+		private void teamCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (playerTeamSearch.Enabled == true)
+			{
+				playerTeamSearch.Enabled = false;
+			}
+			else
+			{
+				playerTeamSearch.Enabled = true;
+			}
+		}
+
+		private void positionCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (playerPositionSearch.Enabled == true)
+			{
+				playerPositionSearch.Enabled = false;
+			}
+			else
+			{
+				playerPositionSearch.Enabled = true;
+			}
+		}
+
+		private void oneTeamSearchButton_CheckedChanged(object sender, EventArgs e)
+		{
+			if (teamOneGameSearch.Enabled == false)
+			{
+				teamOneGameSearch.Enabled = true;
+			}
+			else if (teamTwoGameSearch.Enabled == true)
+			{
+				teamTwoGameSearch.Enabled = false;
+			}
+		}
+
+		private void twoTeamsSearchButton_CheckedChanged(object sender, EventArgs e)
+		{
+			if (teamOneGameSearch.Enabled == false)
+			{
+				teamOneGameSearch.Enabled = true;
+			}
+			else if (teamTwoGameSearch.Enabled == false)
+			{
+				teamTwoGameSearch.Enabled = true;
+			}
+		}
+
+		private void teamNameCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (teamNameSearch.Enabled == true)
+			{
+				teamNameSearch.Enabled = false;
+			}
+			else
+			{
+				teamNameSearch.Enabled = true;
+			}
+		}
+
+		private void teamCityCheck_CheckedChanged(object sender, EventArgs e)
+		{
+			if (teamCitySearch.Enabled == true)
+			{
+				teamCitySearch.Enabled = false;
+			}
+			else
+			{
+				teamCitySearch.Enabled = true;
+			}
+		}
+
+		private void searchPlayers_Click(object sender, EventArgs e)
+		{
+			playerSearchConsole.Text = null;
+			SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
+			var basketballDB = new BasketballDB(connection);
+			var players = basketballDB.GetTable<Player>();
+			var name = "";
+			var number = -1;
+			var team = "";
+			var position = "";
+
+			if (playerNameSearch.Enabled == true)
+			{
+				name = playerNameSearch.Text;
+			}
+			else if (playerNumberSearch.Enabled == true)
+			{
+				number = int.Parse(playerNumberSearch.Text);
+			}
+			else if (playerTeamSearch.Enabled == true)
+			{
+				team = playerTeamSearch.Text;
+			}
+			else if (playerPositionSearch.Enabled == true)
+			{
+				position = UppercaseFirst(playerPositionSearch.Text);
+			}
+			else
+			{
+				playerSearchConsole.Text = "You can't search nothing, duh.";
+			}
+
+			if (name != "" && number == -1 && team == "" && position == "")
+			{
+				var searchedPlayers =
+					from player in basketballDB.Players
+					where player.Name == name
+					select player;
+				playerSearchConsole.Text = "Name\t\tNumber\tTeam\tPosition";
+				playerSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+				if (!searchedPlayers.Any())
+				{
+					playerSearchConsole.Text = "Nothing found.";
+				}
+				else
+				{
+					foreach (var player in searchedPlayers)
+					{
+						playerSearchConsole.Text += $"\n{player.Name}\t{player.Number}\t{player.Team}\t{player.Position}";
+					}
+				}
+			}
+			else if (name == "" && number != -1 && team == "" && position == "")
+			{
+				var searchedPlayers =
+					from player in basketballDB.Players
+					where player.Number == number
+					select player;
+				playerSearchConsole.Text = "Name\t\tNumber\tTeam\tPosition";
+				playerSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+				if (!searchedPlayers.Any())
+				{
+					playerSearchConsole.Text = "Nothing found.";
+				}
+				else
+				{
+					foreach (var player in searchedPlayers)
+					{
+						playerSearchConsole.Text += $"\n{player.Name}\t{player.Number}\t{player.Team}\t{player.Position}";
+					}
+				}
+			}
+			else if (name == "" && number == -1 && team != "" && position == "")
+			{
+				var searchedPlayers =
+					from player in basketballDB.Players
+					where player.Team == team
+					select player;
+				playerSearchConsole.Text = "Name\t\tNumber\tTeam\tPosition";
+				playerSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+				if (!searchedPlayers.Any())
+				{
+					playerSearchConsole.Text = "Nothing found.";
+				}
+				else
+				{
+					foreach (var player in searchedPlayers)
+					{
+						playerSearchConsole.Text += $"\n{player.Name}\t{player.Number}\t{player.Team}\t{player.Position}";
+					}
+				}
+			}
+			else if (name == "" && number == -1 && team == "" && position != "")
+			{
+				var searchedPlayers =
+					from player in basketballDB.Players
+					where player.Position == position
+					select player;
+				playerSearchConsole.Text = "Name\t\tNumber\tTeam\tPosition";
+				playerSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+				if (!searchedPlayers.Any())
+				{
+					playerSearchConsole.Text = "Nothing found.";
+				}
+				else
+				{
+					foreach (var player in searchedPlayers)
+					{
+						playerSearchConsole.Text += $"\n{player.Name}\t{player.Number}\t{player.Team}\t{player.Position}";
+					}
+				}
+			}
+
+			basketballDB.Dispose();
+			connection.Close();
+		}
+
+		private void searchGames_Click(object sender, EventArgs e)
+		{
+			SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
+			var basketballDB = new BasketballDB(connection);
+			var games = basketballDB.GetTable<Game>();
+
+			basketballDB.Dispose();
+			connection.Close();
+		}
+
+		private void searchTeams_Click(object sender, EventArgs e)
+		{
+			SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
+			var basketballDB = new BasketballDB(connection);
+			var teams = basketballDB.GetTable<Team>();
+
+			basketballDB.Dispose();
+			connection.Close();
+		}
+
+		private void playerSearchConsole_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+	}
 }
