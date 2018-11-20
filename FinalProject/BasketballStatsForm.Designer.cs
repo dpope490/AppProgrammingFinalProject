@@ -77,11 +77,12 @@
             this.addTeamButton = new System.Windows.Forms.Button();
             this.addTeamReset = new System.Windows.Forms.Button();
             this.addTeamConsole = new System.Windows.Forms.RichTextBox();
-            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.searchTabs = new System.Windows.Forms.TabControl();
+            this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.playerSearchTab = new System.Windows.Forms.TabPage();
+            this.gameSearchTab = new System.Windows.Forms.TabPage();
+            this.teamSearchTab = new System.Windows.Forms.TabPage();
             this.StatsTab.SuspendLayout();
             this.addPlayerTab.SuspendLayout();
             this.positionBox.SuspendLayout();
@@ -89,8 +90,8 @@
             this.addGameTab.SuspendLayout();
             this.addTeamTab.SuspendLayout();
             this.searchStatsTab.SuspendLayout();
+            this.searchTabs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).BeginInit();
-            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // StatsTab
@@ -466,7 +467,7 @@
             // 
             // searchStatsTab
             // 
-            this.searchStatsTab.Controls.Add(this.tabControl1);
+            this.searchStatsTab.Controls.Add(this.searchTabs);
             this.searchStatsTab.Controls.Add(this.label2);
             this.searchStatsTab.Location = new System.Drawing.Point(4, 22);
             this.searchStatsTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -618,10 +619,6 @@
             this.addTeamConsole.TabIndex = 13;
             this.addTeamConsole.Text = "";
             // 
-            // playerBindingSource
-            // 
-            this.playerBindingSource.DataSource = typeof(FinalProject.Player);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -633,35 +630,47 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Search statistics by player, game, or team\r\n\r\n";
             // 
-            // tabControl1
+            // searchTabs
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 57);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(343, 387);
-            this.tabControl1.TabIndex = 4;
+            this.searchTabs.Controls.Add(this.playerSearchTab);
+            this.searchTabs.Controls.Add(this.gameSearchTab);
+            this.searchTabs.Controls.Add(this.teamSearchTab);
+            this.searchTabs.Location = new System.Drawing.Point(0, 57);
+            this.searchTabs.Name = "searchTabs";
+            this.searchTabs.SelectedIndex = 0;
+            this.searchTabs.Size = new System.Drawing.Size(343, 387);
+            this.searchTabs.TabIndex = 4;
             // 
-            // tabPage1
+            // playerBindingSource
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(335, 361);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.playerBindingSource.DataSource = typeof(FinalProject.Player);
             // 
-            // tabPage2
+            // playerSearchTab
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.playerSearchTab.Location = new System.Drawing.Point(4, 22);
+            this.playerSearchTab.Name = "playerSearchTab";
+            this.playerSearchTab.Size = new System.Drawing.Size(335, 361);
+            this.playerSearchTab.TabIndex = 0;
+            this.playerSearchTab.Text = "Player";
+            this.playerSearchTab.UseVisualStyleBackColor = true;
+            // 
+            // gameSearchTab
+            // 
+            this.gameSearchTab.Location = new System.Drawing.Point(4, 22);
+            this.gameSearchTab.Name = "gameSearchTab";
+            this.gameSearchTab.Size = new System.Drawing.Size(335, 361);
+            this.gameSearchTab.TabIndex = 1;
+            this.gameSearchTab.Text = "Game";
+            this.gameSearchTab.UseVisualStyleBackColor = true;
+            // 
+            // teamSearchTab
+            // 
+            this.teamSearchTab.Location = new System.Drawing.Point(4, 22);
+            this.teamSearchTab.Name = "teamSearchTab";
+            this.teamSearchTab.Size = new System.Drawing.Size(335, 361);
+            this.teamSearchTab.TabIndex = 2;
+            this.teamSearchTab.Text = "Team";
+            this.teamSearchTab.UseVisualStyleBackColor = true;
             // 
             // BasketballStatsForm
             // 
@@ -684,8 +693,8 @@
             this.addTeamTab.PerformLayout();
             this.searchStatsTab.ResumeLayout(false);
             this.searchStatsTab.PerformLayout();
+            this.searchTabs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.playerBindingSource)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -741,9 +750,10 @@
         private System.Windows.Forms.Label addTeamTitleLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox addTeamConsole;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabControl searchTabs;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage playerSearchTab;
+        private System.Windows.Forms.TabPage gameSearchTab;
+        private System.Windows.Forms.TabPage teamSearchTab;
     }
 }
