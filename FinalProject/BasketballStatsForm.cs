@@ -114,7 +114,8 @@ namespace FinalProject
 
 		private void submitScoreButton_Click(object sender, EventArgs e)
 		{
-			SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
+            addGameConsole.Text = null;
+            SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
 			var basketballDB = new BasketballDB(connection);
 			var games = basketballDB.GetTable<Game>();
 			var id = 1;
@@ -132,7 +133,9 @@ namespace FinalProject
 
 			games.InsertOnSubmit(game);
 			basketballDB.SubmitChanges();
-
+            //ask Mark about this
+            String consoleText = $"{teamOne} VS {teamTwo}";
+            addGameConsole.Text = consoleText;
 
 			if (teamOnePoints > teamTwoPoints)
 			{
@@ -140,11 +143,20 @@ namespace FinalProject
 					from team in basketballDB.Teams
 					where team.Name == teamOne
 					select team;
+                var losingTeam =
+                    from team in basketballDB.Teams
+                    where team.Name == teamTwo
+                    select team;
 				foreach (var team in winningTeam)
 				{
 					team.Wins++;
 				}
+                foreach (var team in losingTeam)
+                {
+                    team.Losses++;
+                }
 				basketballDB.SubmitChanges();
+                addGameConsole.Text += $"\n{teamOne} win!";
 			}
 			else
 			{
@@ -152,11 +164,20 @@ namespace FinalProject
 					from team in basketballDB.Teams
 					where team.Name == teamTwo
 					select team;
-				foreach (var team in winningTeam)
+                var losingTeam =
+                    from team in basketballDB.Teams
+                    where team.Name == teamOne
+                    select team;
+                foreach (var team in winningTeam)
 				{
 					team.Wins++;
 				}
+                foreach (var team in losingTeam)
+                {
+                    team.Losses++;
+                }
 				basketballDB.SubmitChanges();
+                addGameConsole.Text += $"\n{teamTwo} get the win!";
 			}
 
 
@@ -164,6 +185,57 @@ namespace FinalProject
 			connection.Close();
 		}
 
-		
-	}
+        private void resetAddGame_Click(object sender, EventArgs e)
+        {
+            foreach (Control control in StatsTab.SelectedTab.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textBox = (TextBox)control;
+                    textBox.Text = null;
+                }
+
+                if (control is ListBox)
+                {
+                    ListBox listBox = (ListBox)control;
+                    listBox.ClearSelected();
+                }
+            }
+            addGameConsole.Text = null;
+        }
+
+        private void addTeamButton_Click(object sender, EventArgs e)
+        {
+            addGameConsole.Text = null;
+            SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
+            var basketballDB = new BasketballDB(connection);
+            var teams = basketballDB.GetTable<Team>();
+
+            var name = teamNameTextBox.Text;
+            var city = cityTextBox.Text;
+            var wins = int.Parse(winsTextBox.Text);
+            var losses = int.Parse(lossesTextBox.Text);
+
+            var team = new Team(name, city, wins, losses);
+
+            teams.InsertOnSubmit(team);
+            basketballDB.SubmitChanges();
+
+            addTeamConsole.Text = $"{city} {name} added.";
+        }
+
+        private void addTeamReset_Click(object sender, EventArgs e)
+        {
+            foreach (Control control in StatsTab.SelectedTab.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textBox = (TextBox)control;
+                    textBox.Text = null;
+                }
+
+            }
+            addTeamConsole.Text = null;
+        }
+    }
 }
