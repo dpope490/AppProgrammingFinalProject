@@ -347,7 +347,7 @@ namespace FinalProject
 			{
 				teamOneGameSearch.Enabled = true;
 			}
-			else if (teamTwoGameSearch.Enabled == false)
+			if (teamTwoGameSearch.Enabled == false)
 			{
 				teamTwoGameSearch.Enabled = true;
 			}
@@ -558,10 +558,60 @@ namespace FinalProject
 		//searches by game
 		private void searchGames_Click(object sender, EventArgs e)
 		{
+			gameSearchConsole.Text = null;
 			SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
 			var basketballDB = new BasketballDB(connection);
 			var games = basketballDB.GetTable<Game>();
+			var teamOne = "";
+			var teamTwo = "";
 
+			if (teamOneGameSearch.Enabled == true)
+			{
+				teamOne = teamOneGameSearch.Text;
+			}
+			else if (teamTwoGameSearch.Enabled == true)
+			{
+				teamTwo = teamTwoGameSearch.Text;
+			}
+			else
+			{
+				gameSearchConsole.Text = "You can't search nothing, duh.";
+			}
+
+			IQueryable<Game> searchedGames = null;
+			if (teamOne != "" && teamTwo == "")
+			{
+				searchedGames =
+					from game in basketballDB.Games
+					where game.TeamOne == teamOne || game.TeamTwo == teamOne
+					select game;
+			}
+			else if (teamOne != "" && teamTwo != "")
+			{
+				searchedGames =
+					from game in basketballDB.Games
+					where (game.TeamOne == teamOne || game.TeamTwo == teamOne) && (game.TeamOne == teamTwo || game.TeamTwo == teamTwo)
+					select game;
+			}
+
+			gameSearchConsole.Text = "Team One\t\tTeamTwo\tTeam One Points\tTeam Two Points";
+			gameSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+			if (!searchedGames.Any())
+			{
+				gameSearchConsole.Text = "Nothing found.";
+			}
+			else
+			{
+				foreach (var game in searchedGames)
+				{
+					gameSearchConsole.Text += $"\n{game.TeamOne}\t{game.TeamTwo}\t{game.TeamOnePoints}\t{game.TeamTwoPoints}";
+				}
+			}
+
+			if (teamTwoGameSearch.Enabled == true && teamOneGameSearch.Text == teamTwoGameSearch.Text)
+			{
+				gameSearchConsole.Text = "The teams cannot be the same.";
+			}
 			basketballDB.Dispose();
 			connection.Close();
 		}
@@ -573,13 +623,15 @@ namespace FinalProject
 			var basketballDB = new BasketballDB(connection);
 			var teams = basketballDB.GetTable<Team>();
 
+
+
 			basketballDB.Dispose();
 			connection.Close();
 		}
 
 		private void playerSearchConsole_TextChanged(object sender, EventArgs e)
 		{
-
+			
 		}
 	}
 }
