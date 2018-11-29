@@ -48,20 +48,54 @@ namespace FinalProject
 					position = rdo.Text;
 				}
 			}
-			var team = teamListBox.GetItemText(teamListBox.SelectedItem);
-			if (int.TryParse(name, out j))
+            var team = teamListBox.GetItemText(teamListBox.SelectedItem);
+
+            var checkForPlayer =
+                from player in basketballDB.Players
+                where player.Name == name && player.Number == number && player.Position == position && player.Team == team
+                select player;
+
+            var checkNumber =
+                from player in basketballDB.Players
+                where player.Number == number && player.Team == team
+                select player;
+
+            if (checkForPlayer.Any())
+            {
+                addPlayerConsole.Text = "The player already exists.";
+            }
+            else if (checkNumber.Any())
+            {
+                addPlayerConsole.Text = "Number already being used.";
+            }
+            else if (int.TryParse(name, out j))
 			{
 				addPlayerConsole.Text = "Name cannot be an integer.";
 			}
 			else
 			{
-				var player = new Player(name, number, team, position);
+                if (String.IsNullOrEmpty(playerNameTextBox.Text))
+                {
+                    addPlayerConsole.Text = "Name field cannot be empty.";
+                }
+                else if (String.IsNullOrEmpty(position))
+                {
+                    addPlayerConsole.Text = "Position must be selected";
+                }
+                else if (teamListBox.SelectedIndex == -1)
+                {
+                    addPlayerConsole.Text = "Team must be selected";
+                }
+                else
+                {
+                    var player = new Player(name, number, team, position);
 
-				//inserts new player into the database
-				players.InsertOnSubmit(player);
-				basketballDB.SubmitChanges();
+                    //inserts new player into the database
+                    players.InsertOnSubmit(player);
+                    basketballDB.SubmitChanges();
 
-				addPlayerConsole.Text = $"Successfully added {name} to the {team}";
+                    addPlayerConsole.Text = $"Successfully added {name} to the {team}";
+                }
 			}
 			basketballDB.Dispose();
             connection.Close();
@@ -152,17 +186,24 @@ namespace FinalProject
 			var teamOnePoints = int.Parse(teamOnePointsTextBox.Text);
 			var teamTwoPoints = int.Parse(teamTwoPointsTextBox.Text);
 
-			if (teamOne == teamTwo)
+            if (teamOneListBox.SelectedIndex == -1 || teamTwoListBox.SelectedIndex == -1)
+            {
+                addGameConsole.Text = "Two teams must be selected";
+            }
+            else if (teamOne == teamTwo)
 			{
 				addGameConsole.Text = "Team One cannot be the same as team two";
 			}
+            else if (teamOnePoints == teamTwoPoints)
+            {
+                addGameConsole.Text = "The teams can't tie!";
+            }
 			else
 			{
 				var game = new Game(id, teamOne, teamTwo, teamOnePoints, teamTwoPoints);
 				//inserts new game into database
 				games.InsertOnSubmit(game);
 				basketballDB.SubmitChanges();
-				//ask Mark about this
 				String consoleText = $"{teamOne} VS {teamTwo}";
 				addGameConsole.Text = consoleText;
 
@@ -248,13 +289,29 @@ namespace FinalProject
             var wins = int.Parse(winsTextBox.Text);
             var losses = int.Parse(lossesTextBox.Text);
 
-            var team = new Team(name, city, wins, losses);
+            var checkName =
+                from t in basketballDB.Teams
+                where t.Name == name
+                select t;
 
-            teams.InsertOnSubmit(team);
-            basketballDB.SubmitChanges();
+            if (String.IsNullOrEmpty(teamNameTextBox.Text) || String.IsNullOrEmpty(cityTextBox.Text))
+            {
+                addTeamConsole.Text = "Name and city fields must be filled out.";
+            }
+            else if (checkName.Any())
+            {
+                addTeamConsole.Text = "A team with that name already exists.";
+            }
+            else
+            {
 
-            addTeamConsole.Text = $"{city} {name} added.";
+                var team = new Team(name, city, wins, losses);
 
+                teams.InsertOnSubmit(team);
+                basketballDB.SubmitChanges();
+
+                addTeamConsole.Text = $"{city} {name} added.";
+            }
 			basketballDB.Dispose();
 			connection.Close();
 		}
@@ -401,7 +458,7 @@ namespace FinalProject
 			}
 			if (playerTeamSearch.Enabled == true)
 			{
-				team = playerTeamSearch.Text;
+				team = UppercaseFirst(playerTeamSearch.Text);
 			}
 			if (playerPositionSearch.Enabled == true)
 			{
@@ -537,7 +594,7 @@ namespace FinalProject
 
 
 			//outputs onto console
-			playerSearchConsole.Text = "Name\t\tNumber\tTeam\tPosition";
+			playerSearchConsole.Text = "PLAYERS";
 			playerSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
 			if (!searchedPlayers.Any())
 			{
@@ -547,9 +604,10 @@ namespace FinalProject
 			{
 				foreach (var player in searchedPlayers)
 				{
-					playerSearchConsole.Text += $"\n{player.Name}\t{player.Number}\t{player.Team}\t{player.Position}";
-				}
-			}
+					playerSearchConsole.Text += $"\n{player.Name} #{player.Number}\r{player.Team} - {player.Position}";
+                    playerSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+                }
+            }
 			basketballDB.Dispose();
 			connection.Close();
 		}
@@ -566,17 +624,19 @@ namespace FinalProject
 
 			if (teamOneGameSearch.Enabled == true)
 			{
-				teamOne = teamOneGameSearch.Text;
+				teamOne = UppercaseFirst(teamOneGameSearch.Text);
 			}
 			if (teamTwoGameSearch.Enabled == true)
 			{
-				teamTwo = teamTwoGameSearch.Text;
+				teamTwo = UppercaseFirst(teamTwoGameSearch.Text);
 			}
 			else
 			{
 				gameSearchConsole.Text = "You can't search nothing, duh.";
 			}
             IQueryable<Game> searchedGames = new Game[] { }.AsQueryable();
+
+            //searches by only one team
 			if (teamOne != "" && teamTwo == "")
 			{
 				searchedGames =
@@ -584,6 +644,7 @@ namespace FinalProject
 					where game.TeamOne == teamOne || game.TeamTwo == teamOne
 					select game;
 			}
+            //searches by two teams
 			else if (teamOne != "" && teamTwo != "")
 			{
 				searchedGames =
@@ -592,6 +653,7 @@ namespace FinalProject
 					select game;
 			}
             
+            //outputs games
 			gameSearchConsole.Text = "Team One\tTeam Two\tT1 PTS\tT2 PTS";
 			gameSearchConsole.Text += "\n---------------------------------------------------------------------------------------";
 			if (!searchedGames.Any())
@@ -620,10 +682,63 @@ namespace FinalProject
 			SQLiteConnection connection = new SQLiteConnection(@"Data Source=.\basketball.sqlite3");
 			var basketballDB = new BasketballDB(connection);
 			var teams = basketballDB.GetTable<Team>();
+            var name = "";
+            var city = "";
 
+            if (teamNameSearch.Enabled == true)
+            {
+                name = UppercaseFirst(teamNameSearch.Text);
+            }
+            if (teamCitySearch.Enabled == true)
+            {
+                city = UppercaseFirst(teamCitySearch.Text);
+            }
+            else
+            {
+                teamSearchConsole.Text = "You can't search nothing, duh.";
+            }
 
+            IQueryable<Team> searchedTeams = new Team[] { }.AsQueryable();
+            //searches by team name
+            if (name != "" && city == "")
+            {
+                searchedTeams =
+                    from team in basketballDB.Teams
+                    where team.Name == name
+                    select team;
+            }
+            //searches by city
+            else if (name == "" && city != "")
+            {
+                searchedTeams =
+                    from team in basketballDB.Teams
+                    where team.City == city
+                    select team;
+            }
+            //searches by name and city
+            else if (name != "" && city != "")
+            {
+                searchedTeams =
+                    from team in basketballDB.Teams
+                    where team.Name == name && team.City == city
+                    select team;
+            }
 
-			basketballDB.Dispose();
+            teamSearchConsole.Text = "TEAMS";
+            teamSearchConsole.Text += "\n--------------------------------------------------------------------------------";
+            if (!searchedTeams.Any())
+            {
+                teamSearchConsole.Text = "Nothing found.";
+            }
+            else
+            {
+                foreach (var team in searchedTeams)
+                {
+                    teamSearchConsole.Text += $"\n{team.City} {team.Name}   {team.Wins} W - {team.Losses} L";
+                }
+            }
+
+            basketballDB.Dispose();
 			connection.Close();
 		}
 

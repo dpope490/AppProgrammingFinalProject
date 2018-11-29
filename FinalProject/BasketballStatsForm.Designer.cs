@@ -120,6 +120,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.teamNameSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.teamSearchConsole = new System.Windows.Forms.RichTextBox();
             this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.StatsTab.SuspendLayout();
             this.addPlayerTab.SuspendLayout();
@@ -308,7 +309,7 @@
             this.addPlayerConsole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addPlayerConsole.Name = "addPlayerConsole";
             this.addPlayerConsole.ShowSelectionMargin = true;
-            this.addPlayerConsole.Size = new System.Drawing.Size(429, 182);
+            this.addPlayerConsole.Size = new System.Drawing.Size(429, 127);
             this.addPlayerConsole.TabIndex = 1;
             this.addPlayerConsole.Text = "";
             // 
@@ -400,7 +401,7 @@
             this.addGameConsole.Location = new System.Drawing.Point(11, 282);
             this.addGameConsole.Margin = new System.Windows.Forms.Padding(4);
             this.addGameConsole.Name = "addGameConsole";
-            this.addGameConsole.Size = new System.Drawing.Size(429, 237);
+            this.addGameConsole.Size = new System.Drawing.Size(429, 180);
             this.addGameConsole.TabIndex = 13;
             this.addGameConsole.Text = "";
             this.addGameConsole.WordWrap = false;
@@ -452,6 +453,7 @@
             this.teamTwoPointsTextBox.Name = "teamTwoPointsTextBox";
             this.teamTwoPointsTextBox.Size = new System.Drawing.Size(100, 22);
             this.teamTwoPointsTextBox.TabIndex = 7;
+            this.teamTwoPointsTextBox.Text = "0";
             // 
             // teamOnePointsTextBox
             // 
@@ -460,6 +462,7 @@
             this.teamOnePointsTextBox.Name = "teamOnePointsTextBox";
             this.teamOnePointsTextBox.Size = new System.Drawing.Size(100, 22);
             this.teamOnePointsTextBox.TabIndex = 6;
+            this.teamOnePointsTextBox.Text = "0";
             // 
             // teamTwoLabel
             // 
@@ -481,10 +484,10 @@
             // 
             // addGameLoadTeams
             // 
-            this.addGameLoadTeams.Location = new System.Drawing.Point(264, 133);
+            this.addGameLoadTeams.Location = new System.Drawing.Point(264, 130);
             this.addGameLoadTeams.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addGameLoadTeams.Name = "addGameLoadTeams";
-            this.addGameLoadTeams.Size = new System.Drawing.Size(117, 23);
+            this.addGameLoadTeams.Size = new System.Drawing.Size(117, 26);
             this.addGameLoadTeams.TabIndex = 3;
             this.addGameLoadTeams.Text = "Load Teams";
             this.addGameLoadTeams.UseVisualStyleBackColor = true;
@@ -582,6 +585,7 @@
             this.winsTextBox.Name = "winsTextBox";
             this.winsTextBox.Size = new System.Drawing.Size(132, 22);
             this.winsTextBox.TabIndex = 10;
+            this.winsTextBox.Text = "0";
             // 
             // lossesTextBox
             // 
@@ -590,6 +594,7 @@
             this.lossesTextBox.Name = "lossesTextBox";
             this.lossesTextBox.Size = new System.Drawing.Size(132, 22);
             this.lossesTextBox.TabIndex = 9;
+            this.lossesTextBox.Text = "0";
             // 
             // lossesLabel
             // 
@@ -787,9 +792,9 @@
             // 
             // playerSearchConsole
             // 
-            this.playerSearchConsole.Location = new System.Drawing.Point(24, 250);
+            this.playerSearchConsole.Location = new System.Drawing.Point(24, 221);
             this.playerSearchConsole.Name = "playerSearchConsole";
-            this.playerSearchConsole.Size = new System.Drawing.Size(346, 149);
+            this.playerSearchConsole.Size = new System.Drawing.Size(346, 172);
             this.playerSearchConsole.TabIndex = 1;
             this.playerSearchConsole.Text = "";
             this.playerSearchConsole.WordWrap = false;
@@ -916,7 +921,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.teamOneGameSearch);
             this.splitContainer2.Panel2.Controls.Add(this.label10);
             this.splitContainer2.Size = new System.Drawing.Size(657, 447);
-            this.splitContainer2.SplitterDistance = 126;
+            this.splitContainer2.SplitterDistance = 132;
             this.splitContainer2.TabIndex = 0;
             // 
             // twoTeamsSearchButton
@@ -952,9 +957,9 @@
             // 
             // gameSearchConsole
             // 
-            this.gameSearchConsole.Location = new System.Drawing.Point(30, 195);
+            this.gameSearchConsole.Location = new System.Drawing.Point(30, 178);
             this.gameSearchConsole.Name = "gameSearchConsole";
-            this.gameSearchConsole.Size = new System.Drawing.Size(396, 170);
+            this.gameSearchConsole.Size = new System.Drawing.Size(396, 215);
             this.gameSearchConsole.TabIndex = 15;
             this.gameSearchConsole.Text = "";
             // 
@@ -1037,6 +1042,7 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.teamSearchConsole);
             this.splitContainer3.Panel2.Controls.Add(this.searchTeams);
             this.splitContainer3.Panel2.Controls.Add(this.teamCitySearch);
             this.splitContainer3.Panel2.Controls.Add(this.label16);
@@ -1044,7 +1050,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.label14);
             this.splitContainer3.Panel2.Controls.Add(this.teamNameSearch);
             this.splitContainer3.Size = new System.Drawing.Size(657, 447);
-            this.splitContainer3.SplitterDistance = 219;
+            this.splitContainer3.SplitterDistance = 127;
             this.splitContainer3.TabIndex = 0;
             // 
             // teamCityCheck
@@ -1080,7 +1086,7 @@
             // 
             // searchTeams
             // 
-            this.searchTeams.Location = new System.Drawing.Point(43, 144);
+            this.searchTeams.Location = new System.Drawing.Point(43, 125);
             this.searchTeams.Name = "searchTeams";
             this.searchTeams.Size = new System.Drawing.Size(181, 30);
             this.searchTeams.TabIndex = 13;
@@ -1091,7 +1097,7 @@
             // teamCitySearch
             // 
             this.teamCitySearch.Enabled = false;
-            this.teamCitySearch.Location = new System.Drawing.Point(124, 116);
+            this.teamCitySearch.Location = new System.Drawing.Point(124, 97);
             this.teamCitySearch.Name = "teamCitySearch";
             this.teamCitySearch.Size = new System.Drawing.Size(100, 22);
             this.teamCitySearch.TabIndex = 12;
@@ -1099,7 +1105,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(40, 116);
+            this.label16.Location = new System.Drawing.Point(40, 96);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(35, 17);
             this.label16.TabIndex = 11;
@@ -1108,7 +1114,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(40, 86);
+            this.label15.Location = new System.Drawing.Point(40, 69);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(49, 17);
             this.label15.TabIndex = 10;
@@ -1118,7 +1124,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(38, 36);
+            this.label14.Location = new System.Drawing.Point(38, 18);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(81, 50);
             this.label14.TabIndex = 9;
@@ -1127,7 +1133,7 @@
             // teamNameSearch
             // 
             this.teamNameSearch.Enabled = false;
-            this.teamNameSearch.Location = new System.Drawing.Point(124, 81);
+            this.teamNameSearch.Location = new System.Drawing.Point(124, 69);
             this.teamNameSearch.Name = "teamNameSearch";
             this.teamNameSearch.Size = new System.Drawing.Size(100, 22);
             this.teamNameSearch.TabIndex = 0;
@@ -1142,6 +1148,14 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Search statistics by player, game, or team\r\n\r\n";
             // 
+            // teamSearchConsole
+            // 
+            this.teamSearchConsole.Location = new System.Drawing.Point(43, 161);
+            this.teamSearchConsole.Name = "teamSearchConsole";
+            this.teamSearchConsole.Size = new System.Drawing.Size(337, 159);
+            this.teamSearchConsole.TabIndex = 14;
+            this.teamSearchConsole.Text = "";
+            // 
             // playerBindingSource
             // 
             this.playerBindingSource.DataSource = typeof(FinalProject.Player);
@@ -1150,7 +1164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 561);
+            this.ClientSize = new System.Drawing.Size(600, 525);
             this.Controls.Add(this.StatsTab);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "BasketballStatsForm";
@@ -1288,5 +1302,6 @@
 		private System.Windows.Forms.Button searchTeams;
 		private System.Windows.Forms.RichTextBox playerSearchConsole;
 		private System.Windows.Forms.RichTextBox gameSearchConsole;
-	}
+        private System.Windows.Forms.RichTextBox teamSearchConsole;
+    }
 }
