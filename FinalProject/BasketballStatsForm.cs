@@ -151,7 +151,6 @@ namespace FinalProject
 			var teamTwo = teamTwoListBox.GetItemText(teamTwoListBox.SelectedItem);
 			var teamOnePoints = int.Parse(teamOnePointsTextBox.Text);
 			var teamTwoPoints = int.Parse(teamTwoPointsTextBox.Text);
-			int j;
 
 			if (teamOne == teamTwo)
 			{
@@ -396,15 +395,15 @@ namespace FinalProject
 			{
 				name = playerNameSearch.Text;
 			}
-			else if (playerNumberSearch.Enabled == true)
+			if (playerNumberSearch.Enabled == true)
 			{
 				number = int.Parse(playerNumberSearch.Text);
 			}
-			else if (playerTeamSearch.Enabled == true)
+			if (playerTeamSearch.Enabled == true)
 			{
 				team = playerTeamSearch.Text;
 			}
-			else if (playerPositionSearch.Enabled == true)
+			if (playerPositionSearch.Enabled == true)
 			{
 				position = UppercaseFirst(playerPositionSearch.Text);
 			}
@@ -412,8 +411,8 @@ namespace FinalProject
 			{
 				playerSearchConsole.Text = "You can't search nothing, duh.";
 			}
-
-			IQueryable<Player> searchedPlayers = null;
+            
+			IQueryable<Player> searchedPlayers = new Player[] { }.AsQueryable();
 
 			//searches by player name
 			if (name != "" && number == -1 && team == "" && position == "")
@@ -447,8 +446,8 @@ namespace FinalProject
 					where player.Position == position
 					select player;
 			}
-			//searcbes by player name and number
-			else if (name != "" && number != -1 && team == "" && position != "")
+			//searches by player name and number
+			else if (name != "" && number != -1 && team == "" && position == "")
 			{
 				searchedPlayers =
 					from player in basketballDB.Players
@@ -569,7 +568,7 @@ namespace FinalProject
 			{
 				teamOne = teamOneGameSearch.Text;
 			}
-			else if (teamTwoGameSearch.Enabled == true)
+			if (teamTwoGameSearch.Enabled == true)
 			{
 				teamTwo = teamTwoGameSearch.Text;
 			}
@@ -577,8 +576,7 @@ namespace FinalProject
 			{
 				gameSearchConsole.Text = "You can't search nothing, duh.";
 			}
-
-			IQueryable<Game> searchedGames = null;
+            IQueryable<Game> searchedGames = new Game[] { }.AsQueryable();
 			if (teamOne != "" && teamTwo == "")
 			{
 				searchedGames =
@@ -590,12 +588,12 @@ namespace FinalProject
 			{
 				searchedGames =
 					from game in basketballDB.Games
-					where (game.TeamOne == teamOne || game.TeamTwo == teamOne) && (game.TeamOne == teamTwo || game.TeamTwo == teamTwo)
+					where (game.TeamOne.Contains(teamOne) && game.TeamTwo.Contains(teamTwo)) || (game.TeamOne.Contains(teamTwo) && game.TeamTwo.Contains(teamOne))
 					select game;
 			}
-
-			gameSearchConsole.Text = "Team One\t\tTeamTwo\tTeam One Points\tTeam Two Points";
-			gameSearchConsole.Text += "\n-----------------------------------------------------------------------------------";
+            
+			gameSearchConsole.Text = "Team One\tTeam Two\tT1 PTS\tT2 PTS";
+			gameSearchConsole.Text += "\n---------------------------------------------------------------------------------------";
 			if (!searchedGames.Any())
 			{
 				gameSearchConsole.Text = "Nothing found.";
@@ -604,7 +602,7 @@ namespace FinalProject
 			{
 				foreach (var game in searchedGames)
 				{
-					gameSearchConsole.Text += $"\n{game.TeamOne}\t{game.TeamTwo}\t{game.TeamOnePoints}\t{game.TeamTwoPoints}";
+					gameSearchConsole.Text += $"\n{game.TeamOne}\t\t{game.TeamTwo}\t\t{game.TeamOnePoints}\t{game.TeamTwoPoints}";
 				}
 			}
 
